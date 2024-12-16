@@ -1,6 +1,9 @@
 #!/bin/bash
 
 _ni_completion() {
+  local old_wordbreaks="$COMP_WORDBREAKS"
+  COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+
   local GLOBAL_FLAGS="-v --version -h --help -C ? -g --frozen"
   local NPM_REGISTRY_API="https://www.npmjs.com/search/suggestions"
 
@@ -108,6 +111,7 @@ _ni_completion() {
 
   [ "$cur" = "?" ] && COMPREPLY=("?")
 
+  COMP_WORDBREAKS="$old_wordbreaks"
   return 0
 }
 
